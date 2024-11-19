@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Edit Teacher Details</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 50%;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .form-control {
+            width: 100%;
+            max-width: 400px; /* Limit width of the input fields */
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #555;
+            background-color: #f7f7f7;
+        }
+
+        .form-control:focus {
+            border-color: #007BFF;
+            outline: none;
+            background-color: #fff;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto; /* Center the button */
+        }
+
+        .btn:hover {
+            background-color: #218838;
+        }
+
+        .mb-3 {
+            margin-bottom: 15px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+        }
+
+        .col-sm-4 {
+            flex: 1;
+        }
+
+        .form-group.row {
+            display: flex;
+            align-items: center;
+        }
+
+        .form-group .col-sm-4 {
+            flex: 0 0 60%;
+        }
+
+        .form-group .col-sm-1 {
+            flex: 0 0 10%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group row">  
+                <label class="col-sm-1 col-form-label"></label>  
+                <div class="col-sm-4">  
+                    <h3>Edit Teacher Details</h3>  
+                </div>  
+            </div>
+            
+            <div class="mb-3">
+                <label for="Tid" class="form-label">Teacher Id:</label>
+                <input type="text" class="form-control" id="Tid" name="Tid" value="{{ teacher.Tid }}" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="Tname" class="form-label">Teacher Name:</label>
+                <input type="text" class="form-control" id="Tname" name="Tname" value="{{ teacher.Tname }}" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="Temail" class="form-label">Teacher Email:</label>
+                <input type="email" class="form-control" id="Temail" name="Temail" value="{{ teacher.Temail }}" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="Tsubject" class="form-label">Subject:</label>
+                <input type="text" class="form-control" id="Tsubject" name="Tsubject" value="{{ teacher.Tsubject }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="Tcontact" class="form-label">Contact Number:</label>
+                <input type="tel" class="form-control" id="Tcontact" name="Tcontact" value="{{ teacher.Tcontact }}" required>
+            </div>
+
+            <button type="submit" class="btn">Update Teacher</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher List</title>
+    <style>
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        h1 {
+            text-align: center;
+        }
+        a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .btn {
+            padding: 5px 10px;
+            color: white;
+            background-color: #007BFF;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Teacher List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Subject</th>
+                <th>Actions</th> <!-- Added a new column for the Edit and Delete buttons -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for teacher in teacher_obj %}
+            <tr>
+                <td>{{ teacher.Tid }}</td>
+                <td>{{ teacher.Tname }}</td>
+                <td>{{ teacher.Temail }}</td>
+                <td>{{ teacher.Tcontact }}</td>
+                <td>{{ teacher.Tsubject }}</td>
+                <td>
+                    <!-- Edit button -->
+                    <a href="{% url 'edit_teacher' teacher.id %}" class="btn">Edit</a>
+                    <!-- Optionally, add a delete button as well -->
+                    <a href="{% url 'delete_teacher' teacher.id %}" class="btn" style="background-color: red;">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" style="text-align: center;">No teachers found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
