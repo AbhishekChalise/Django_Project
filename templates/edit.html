@@ -3,57 +3,175 @@
 <head>  
     <meta charset="UTF-8">  
     <title>Index</title>  
-    {% load static %}  
-    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>  
+    <style>
+        /* General Reset */
+        body, h3, label, input, button {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styling */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Center the form on the page */
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Title styling */
+        h3 {
+            text-align: center;
+            color: #4caf50;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        /* Form group styling */
+        .form-group {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .form-group .col-form-label {
+            text-align: right;
+            font-size: 16px;
+            padding-right: 10px;
+            color: #555;
+        }
+
+        .form-group .col-sm-2 {
+            flex: 0 0 33%;
+        }
+
+        .form-group .col-sm-4 {
+            flex: 1;
+        }
+
+        /* Input field styling */
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            transition: border 0.3s;
+        }
+
+        input[type="text"]:focus, input[type="email"]:focus {
+            border-color: #4caf50;
+            box-shadow: 0 0 4px rgba(76, 175, 80, 0.3);
+        }
+
+        /* Submit button styling */
+        button.btn-success {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button.btn-success:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .form-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .form-group label {
+                text-align: left;
+                padding: 0;
+            }
+
+            .form-group .col-sm-2 {
+                flex: 0 0 100%;
+            }
+
+            .form-group .col-sm-4 {
+                flex: 0 0 100%;
+            }
+        }
+    </style>
 </head>  
 <body>  
-  <form method="POST" class="post-form">
-    {% csrf_token %}
-    <div class="container">
-        <br>
-        <div class="form-group row">
-            <label class="col-sm-1 col-form-label"></label>
-            <div class="col-sm-4">
-                <h3>Update Details</h3>
+    <form method="POST" class="post-form">
+        {% csrf_token %}
+        <div class="container">
+            <br>
+            <div class="form-group row">
+                <label class="col-sm-1 col-form-label"></label>
+                <div class="col-sm-4">
+                    <h3>Update Details</h3>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Student Id:</label>
+                <div class="col-sm-4">
+                    <input type="text" name="sid" id="id_sid" required maxlength="20" value="{{ student.sid }}"/>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Student Name:</label>
+                <div class="col-sm-4">
+                    <input type="text" name="sname" id="id_sname" required maxlength="100" value="{{ student.sname }}"/>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Student Email:</label>
+                <div class="col-sm-4">
+                    <input type="email" name="semail" id="id_semail" required maxlength="254" value="{{ student.semail }}"/>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Student Contact:</label>
+                <div class="col-sm-4">
+                    <input type="text" name="scontact" id="id_scontact" required maxlength="15" value="{{ student.scontact }}"/>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-1 col-form-label"></label>
+                <div class="col-sm-4">
+                    <button type="submit" class="btn btn-success">Update</button>
+                </div>
             </div>
         </div>
-
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Student Id:</label>
-            <div class="col-sm-4">
-                <input type="text" name="sid" id="id_sid" required maxlength="20" value="{{ student.sid }}"/>
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Student Name:</label>
-            <div class="col-sm-4">
-                <input type="text" name="sname" id="id_sname" required maxlength="100" value="{{ student.sname }}"/>
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Student Email:</label>
-            <div class="col-sm-4">
-                <input type="email" name="semail" id="id_semail" required maxlength="254" value="{{ student.semail }}"/>
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Student Contact:</label>
-            <div class="col-sm-4">
-                <input type="text" name="scontact" id="id_scontact" required maxlength="15" value="{{ student.scontact }}"/>
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label class="col-sm-1 col-form-label"></label>
-            <div class="col-sm-4">
-                <button type="submit" class="btn btn-success">Update</button>
-            </div>
-        </div>
-    </div>
-</form>
-
+    </form>
 </body>  
-</html>  
+</html>

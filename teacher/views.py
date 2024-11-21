@@ -3,10 +3,17 @@ from teacher.forms import Teacher_forms
 from django.shortcuts import redirect
 from teacher.models import Teacher
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 # Create your views here.
 
 # Note Very important thing you cannot put the Class name and the Form name same.
+
+def home_view(request):
+    return render(request,'home.html')
+
+@login_required (login_url = '/Login/')
 def Teachers(request):
     if request.method == 'GET':
         form = Teacher_forms()
@@ -35,8 +42,10 @@ def Teachers(request):
         
 # This is the method for the rendering the post request.
 
+@login_required (login_url = '/Login/')
 def Show_teacher(request):
-    teacher_obj = Teacher.objects.all()
+    print(f"Is User Logged In: {request.user.is_authenticated}")
+    teacher_obj = Teacher.objects.filter( Tdeleted = False)
     print(teacher_obj)
     teacher_session = request.session.get(Teachers)
     context = {
@@ -85,6 +94,7 @@ def delete_teacher(request,id):
     teacher_instance.save()
     # teacher_instance.delete()
     return redirect('showTeacher')
+
 
 # return of .get
 # .filter

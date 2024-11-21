@@ -19,18 +19,26 @@ from django.urls import path
 from student.views import student,show
 from student.views import edit_students
 from student.views import delete
-from teacher.views import Teachers
+from teacher.views import Teachers,home_view
 from teacher.views import Show_teacher,edit_teacher,delete_teacher
+from authentication.views import register,Login,logout_view
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
+    path("",home_view,name = 'home'),
     path('admin/', admin.site.urls),
     path('student/',student,name = 'student'),
     path('student/show/',show,name = 'show'),
     path('student/edit/<int:id>/', edit_students , name = 'edit_student'),
     path('student/delete/<int:id>/',delete,name = 'delete_student'),
     path('teacher/',Teachers,name = 'teacher_info'),
-    path('teacher/show/', Show_teacher , name = 'showTeacher'),
+    path('teacher/show/', login_required(Show_teacher), name = 'showTeacher'),
     path('teacher/edit/<int:id>/',edit_teacher,name = 'edit_teacher'),
     path('teacher/delete/<int:id>/',delete_teacher,name = 'delete_teacher'),
+    path('register/', register ,name = 'register'),
+    path('Login/',Login, name  = 'login'),
+    path('logout/', logout_view, name='logout'),
+    path('accounts/login/', Login, name='login')
 ]
 

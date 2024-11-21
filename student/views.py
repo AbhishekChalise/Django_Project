@@ -3,10 +3,12 @@ from django.shortcuts import get_object_or_404
 from student.forms import student_forms
 from student.models import Student
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 # Create operation: 
 # Here we have created a session and printed all the data in the page. 
+@login_required(login_url = '/Login/')
 def student(request):
     if request.method == 'POST':
         print('We are here 1')
@@ -36,10 +38,10 @@ def student(request):
         # return(request , 'index.html') #This is the   # Finally return to the same login page. If there occurs any error.
  
  # This is Show.html file.
-
+@login_required(login_url = '/Login/')
 def show(request):
     # Here a session is defined.
-    student_obj = Student.objects.all()
+    student_obj = Student.objects.filter(sdelete = False)
     student_session = request.session.get(student)
     context = {
         'student_obj':student_obj,
